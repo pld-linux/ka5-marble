@@ -1,18 +1,30 @@
-%define		kdeappsver	18.04.0
-%define		qtver		5.3.2
+%define		kdeappsver	18.12.0
+%define		qtver		5.9.0
 %define		kaname		marble
 Summary:	marble
 Name:		ka5-%{kaname}
-Version:	18.04.0
+Version:	18.12.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	571cb31746a0eaa4aa9c9b0363b12d25
+# Source0-md5:	eded2e2c97bec61e605e65e463d0b66d
 URL:		http://www.kde.org/
+BuildRequires:	Qt5Concurrent-devel
 BuildRequires:	Qt5Core-devel >= %{qtver}
+BuildRequires:	Qt5Gui-devel >= 5.11.1
+BuildRequires:	Qt5Network-devel
+BuildRequires:	Qt5PrintSupport-devel
+BuildRequires:	Qt5Qml-devel >= 5.11.1
+BuildRequires:	Qt5Quick-devel
+BuildRequires:	Qt5Sql-devel
+BuildRequires:	Qt5Svg-devel
+BuildRequires:	Qt5Test-devel
+BuildRequires:	Qt5Widgets-devel
+BuildRequires:	Qt5Xml-devel
 BuildRequires:	cmake >= 2.8.12
-BuildRequires:	kf5-extra-cmake-modules >= 1.4.0
+BuildRequires:	gettext-devel
+BuildRequires:	kf5-extra-cmake-modules >= 5.53.0
 BuildRequires:	qt5-build >= %{qtver}
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	shared-mime-info
@@ -21,11 +33,26 @@ BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-marble
+Marble is a Virtual Globe and World Atlas that you can use to learn
+more about the Earth.
+
+Features
+
+• You can pan and zoom around and you can look up places and roads • A
+mouse click on a place label will provide the respective Wikipedia
+article • You can measure distances between locations • It offers
+different thematic maps: a classroom-style topographic map, a
+satellite view, street map, Earth at night and temperature and
+precipitation maps. All maps include a custom map key, so it can also
+be used as an educational tool for use in classrooms • For educational
+purposes you can also change date and time and watch how the starry
+sky and the twilight zone on the map change • Supports multiple
+projections: choose between a Flat Map ("Plate carré"), Mercator or
+the Globe • Promotes the usage of free maps
 
 %package devel
 Summary:	Header files for %{kaname} development
-Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kpname}
+Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kaname}
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -111,7 +138,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/marble
 %{_datadir}/metainfo/org.kde.marble.appdata.xml
 %{_datadir}/metainfo/org.kde.plasma.worldclock.appdata.xml
-%{_datadir}/metainfo/org.kde.plasma.worldmap.appdata.xml
+#%%{_datadir}/metainfo/org.kde.plasma.worldmap.appdata.xml
 %{_datadir}/mime/packages/geo.xml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.worldclock
 %{_datadir}/plasma/wallpapers/org.kde.plasma.worldmap
