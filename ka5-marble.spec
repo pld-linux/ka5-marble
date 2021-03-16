@@ -1,15 +1,15 @@
-%define		kdeappsver	19.04.1
+%define		kdeappsver	20.12.3
 %define		kframever	5.56.0
 %define		qtver		5.9.0
 %define		kaname		marble
 Summary:	marble
 Name:		ka5-%{kaname}
-Version:	19.04.1
-Release:	2
+Version:	20.12.3
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
-Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	a36981792efc95151234e076615d4e60
+Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
+# Source0-md5:	e4c781350fbe7f86a782320e52c2a448
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Concurrent-devel
 BuildRequires:	Qt5Core-devel >= %{qtver}
@@ -95,7 +95,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{kaname}.lang
 %defattr(644,root,root,755)
-/etc/xdg/marble.knsrc
 %attr(755,root,root) %{_bindir}/marble
 %attr(755,root,root) %{_bindir}/marble-qt
 %{_libdir}/libastro.so.0.*.*
@@ -108,11 +107,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/plugins
 %dir %{_libdir}/plugins/designer
 
-%{_libdir}/plugins/designer/libLatLonEditPlugin.so
-%{_libdir}/plugins/designer/libMarbleNavigatorPlugin.so
-%{_libdir}/plugins/designer/libMarbleWidgetPlugin.so
 %{_libdir}/qt5/plugins/libmarble_part.so
-%{_libdir}/qt5/plugins/libmarblethumbnail.so
 %{_libdir}/qt5/plugins/plasma_runner_marble.so
 %{_libdir}/qt5/qml/org/kde/marble
 %{_desktopdir}/marble_geo.desktop
@@ -147,6 +142,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mime/packages/geo.xml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.worldclock
 %{_datadir}/plasma/wallpapers/org.kde.plasma.worldmap
+%attr(755,root,root) %{_libdir}/plugins/designer/LatLonEditPlugin.so
+%attr(755,root,root) %{_libdir}/plugins/designer/MarbleNavigatorPlugin.so
+%attr(755,root,root) %{_libdir}/plugins/designer/MarbleWidgetPlugin.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/marblethumbnail.so
+%{_datadir}/knsrcfiles/marble.knsrc
 
 %files devel
 %defattr(644,root,root,755)
@@ -156,7 +156,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Marble
 %{_libdir}/libastro.so
 %{_libdir}/libmarblewidget-qt5.so
-
-#%dir %{_prefix}/mkspecs
-#%dir %{_prefix}/mkspecs/modules
-#%{_prefix}/mkspecs/modules/qt_Marble.pri
+%{_prefix}/mkspecs/modules/qt_Marble.pri
