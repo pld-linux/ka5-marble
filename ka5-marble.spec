@@ -1,15 +1,15 @@
-%define		kdeappsver	21.04.0
+%define		kdeappsver	21.04.1
 %define		kframever	5.81.0
 %define		qtver		5.9.0
 %define		kaname		marble
 Summary:	marble
 Name:		ka5-%{kaname}
-Version:	21.04.0
+Version:	21.04.1
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	87ffeaf9d7b30203c05b79153dd96664
+# Source0-md5:	9d1c7d5f4d2b3de32c5e48e5d35758f1
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Concurrent-devel
 BuildRequires:	Qt5Core-devel >= %{qtver}
