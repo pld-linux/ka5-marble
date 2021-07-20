@@ -5,7 +5,7 @@
 Summary:	marble
 Name:		ka5-%{kaname}
 Version:	21.04.3
-Release:	1
+Release:	2
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
@@ -141,8 +141,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kservices5/marble_thumbnail_kml.desktop
 %{_datadir}/kservices5/marble_thumbnail_kmz.desktop
 %{_datadir}/kservices5/marble_thumbnail_osm.desktop
-%{_datadir}/kservices5/plasma-applet-org.kde.plasma.worldclock.desktop
-%{_datadir}/kservices5/plasma-wallpaper-org.kde.plasma.worldmap.desktop
+#%{_datadir}/kservices5/plasma-applet-org.kde.plasma.worldclock.desktop
+#%{_datadir}/kservices5/plasma-wallpaper-org.kde.plasma.worldmap.desktop
 %{_datadir}/kxmlgui5/marble
 %{_datadir}/marble
 %{_datadir}/metainfo/org.kde.marble.appdata.xml
