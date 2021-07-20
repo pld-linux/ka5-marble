@@ -5,7 +5,7 @@
 Summary:	marble
 Name:		ka5-%{kaname}
 Version:	21.04.3
-Release:	2
+Release:	3
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
@@ -157,6 +157,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt5/plugins/marblethumbnail.so
 %{_datadir}/knsrcfiles/marble.knsrc
 %attr(755,root,root) %{_libdir}/qt5/plugins/kf5/krunner/plasma_runner_marble.so
+%dir %{_docdir}/HTML/{ca,de,en,es,et,fr,gl,it,lt,nl,pt,pt_BR,ru,sv,uk}/marble
+%{_docdir}/HTML/*/marble/index.cache.bz2
+%{_docdir}/HTML/*/marble/index.docbook
+%{_docdir}/HTML/*/marble/*.png
 
 %files devel
 %defattr(644,root,root,755)
