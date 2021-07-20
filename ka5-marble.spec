@@ -125,6 +125,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/marble_gpx.desktop
 %{_desktopdir}/marble_kml.desktop
 %{_desktopdir}/marble_kmz.desktop
+%{_desktopdir}/marble_shp.desktop
 %{_desktopdir}/marble_worldwind.desktop
 %{_desktopdir}/org.kde.marble-qt.desktop
 %{_desktopdir}/org.kde.marble.desktop
@@ -141,8 +142,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kservices5/marble_thumbnail_kml.desktop
 %{_datadir}/kservices5/marble_thumbnail_kmz.desktop
 %{_datadir}/kservices5/marble_thumbnail_osm.desktop
-#%{_datadir}/kservices5/plasma-applet-org.kde.plasma.worldclock.desktop
-#%{_datadir}/kservices5/plasma-wallpaper-org.kde.plasma.worldmap.desktop
+%{_datadir}/kservices5/marble_thumbnail_shp.desktop
 %{_datadir}/kxmlgui5/marble
 %{_datadir}/marble
 %{_datadir}/metainfo/org.kde.marble.appdata.xml
