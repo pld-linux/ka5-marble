@@ -1,15 +1,15 @@
-%define		kdeappsver	21.04.3
+%define		kdeappsver	21.08.0
 %define		kframever	5.81.0
 %define		qtver		5.9.0
 %define		kaname		marble
 Summary:	marble
 Name:		ka5-%{kaname}
-Version:	21.04.3
-Release:	3
+Version:	21.08.0
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	fd4f15198564a34a43341733ad1304b8
+# Source0-md5:	268243f30d2ca32c6be3a089f1060fa3
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Concurrent-devel
 BuildRequires:	Qt5Core-devel >= %{qtver}
@@ -43,6 +43,7 @@ BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
+Requires:	%{name}-data = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -62,6 +63,18 @@ purposes you can also change date and time and watch how the starry
 sky and the twilight zone on the map change • Supports multiple
 projections: choose between a Flat Map ("Plate carré"), Mercator or
 the Globe • Promotes the usage of free maps
+
+%package data
+Summary:	Data files for %{kaname}
+Summary(pl.UTF-8):	Dane dla %{kaname}
+Group:		X11/Applications
+BuildArch:	noarch
+
+%description data
+Data files for %{kaname}.
+
+%description data -l pl.UTF-8
+Dane dla %{kaname}.
 
 %package devel
 Summary:	Header files for %{kaname} development
@@ -104,15 +117,15 @@ rm -rf $RPM_BUILD_ROOT
 %postun	-p /sbin/ldconfig
 
 
-%files -f %{kaname}.lang
+%files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/marble
 %attr(755,root,root) %{_bindir}/marble-qt
 %{_libdir}/libastro.so.0.*.*
 %ghost %{_libdir}/libastro.so.1
 %{_libdir}/libmarbledeclarative.so
-%{_libdir}/libmarblewidget-qt5.so.0.*.*
 %ghost %{_libdir}/libmarblewidget-qt5.so.28
+%{_libdir}/libmarblewidget-qt5.so.*.*.*
 %{_libdir}/marble
 
 %dir %{_libdir}/plugins
@@ -120,12 +133,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_libdir}/qt5/plugins/libmarble_part.so
 %{_libdir}/qt5/qml/org/kde/marble
+%attr(755,root,root) %{_libdir}/plugins/designer/LatLonEditPlugin.so
+%attr(755,root,root) %{_libdir}/plugins/designer/MarbleNavigatorPlugin.so
+%attr(755,root,root) %{_libdir}/plugins/designer/MarbleWidgetPlugin.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/marblethumbnail.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/kf5/krunner/plasma_runner_marble.so
+
+%files data -f %{kaname}.lang
+%defattr(644,root,root,755)
 %{_desktopdir}/marble_geo.desktop
 %{_desktopdir}/marble_geojson.desktop
 %{_desktopdir}/marble_gpx.desktop
 %{_desktopdir}/marble_kml.desktop
 %{_desktopdir}/marble_kmz.desktop
-%{_desktopdir}/marble_shp.desktop
 %{_desktopdir}/marble_worldwind.desktop
 %{_desktopdir}/org.kde.marble-qt.desktop
 %{_desktopdir}/org.kde.marble.desktop
@@ -142,7 +162,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kservices5/marble_thumbnail_kml.desktop
 %{_datadir}/kservices5/marble_thumbnail_kmz.desktop
 %{_datadir}/kservices5/marble_thumbnail_osm.desktop
-%{_datadir}/kservices5/marble_thumbnail_shp.desktop
 %{_datadir}/kxmlgui5/marble
 %{_datadir}/marble
 %{_datadir}/metainfo/org.kde.marble.appdata.xml
@@ -151,12 +170,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mime/packages/geo.xml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.worldclock
 %{_datadir}/plasma/wallpapers/org.kde.plasma.worldmap
-%attr(755,root,root) %{_libdir}/plugins/designer/LatLonEditPlugin.so
-%attr(755,root,root) %{_libdir}/plugins/designer/MarbleNavigatorPlugin.so
-%attr(755,root,root) %{_libdir}/plugins/designer/MarbleWidgetPlugin.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/marblethumbnail.so
 %{_datadir}/knsrcfiles/marble.knsrc
-%attr(755,root,root) %{_libdir}/qt5/plugins/kf5/krunner/plasma_runner_marble.so
 %dir %{_docdir}/HTML/{ca,de,en,es,et,fr,gl,it,lt,nl,pt,pt_BR,ru,sv,uk}/marble
 %{_docdir}/HTML/*/marble/index.cache.bz2
 %{_docdir}/HTML/*/marble/index.docbook
