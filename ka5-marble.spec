@@ -1,15 +1,15 @@
-%define		kdeappsver	21.08.3
+%define		kdeappsver	21.12.0
 %define		kframever	5.81.0
 %define		qtver		5.9.0
 %define		kaname		marble
 Summary:	marble
 Name:		ka5-%{kaname}
-Version:	21.08.3
-Release:	2
+Version:	21.12.0
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	cee3ef415e083ef724d9c8c1ac67a362
+# Source0-md5:	8aa3b3e5e1c28cadd83c545679e5ed7d
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Concurrent-devel
 BuildRequires:	Qt5Core-devel >= %{qtver}
@@ -40,6 +40,7 @@ BuildRequires:	kf5-plasma-framework-devel >= %{kframever}
 BuildRequires:	ninja
 BuildRequires:	qt5-build >= %{qtver}
 BuildRequires:	rpmbuild(macros) >= 1.164
+BuildRequires:	shapelib-devel
 BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -121,7 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/marble
 %attr(755,root,root) %{_bindir}/marble-qt
-%{_libdir}/libastro.so.0.*.*
+%{_libdir}/libastro.so.*.*.*
 %ghost %{_libdir}/libastro.so.1
 %{_libdir}/libmarbledeclarative.so
 %ghost %{_libdir}/libmarblewidget-qt5.so.28
