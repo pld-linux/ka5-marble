@@ -1,15 +1,15 @@
-%define		kdeappsver	21.12.0
+%define		kdeappsver	21.12.1
 %define		kframever	5.81.0
 %define		qtver		5.9.0
 %define		kaname		marble
 Summary:	marble
 Name:		ka5-%{kaname}
-Version:	21.12.0
+Version:	21.12.1
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	8aa3b3e5e1c28cadd83c545679e5ed7d
+# Source0-md5:	c19036e89dd088e7afda3aa9a2f0629d
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Concurrent-devel
 BuildRequires:	Qt5Core-devel >= %{qtver}
@@ -178,6 +178,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/HTML/*/marble/index.cache.bz2
 %{_docdir}/HTML/*/marble/index.docbook
 %{_docdir}/HTML/*/marble/*.png
+%{_datadir}/kservices5/plasma-applet-org.kde.plasma.worldclock.desktop
+%{_datadir}/kservices5/plasma-wallpaper-org.kde.plasma.worldmap.desktop
 
 %files devel
 %defattr(644,root,root,755)
