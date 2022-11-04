@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	22.08.2
+%define		kdeappsver	22.08.3
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		marble
 Summary:	marble
 Name:		ka5-%{kaname}
-Version:	22.08.2
+Version:	22.08.3
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	ad9605a51f344e4b2cc94c2e4e8f635d
+# Source0-md5:	2e2d24ffb77ab56207befc95a5d09a19
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Concurrent-devel
 BuildRequires:	Qt5Core-devel >= %{qtver}
