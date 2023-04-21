@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	22.12.3
+%define		kdeappsver	23.04.0
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		marble
 Summary:	marble
 Name:		ka5-%{kaname}
-Version:	22.12.3
-Release:	2
+Version:	23.04.0
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	fb869d34e90d19d30025809cb5b005d1
+# Source0-md5:	16dd43d7e9fa591a37fddadd5137cea2
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Concurrent-devel
 BuildRequires:	Qt5Core-devel >= %{qtver}
@@ -182,7 +182,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mime/packages/geo.xml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.worldclock
 %{_datadir}/plasma/wallpapers/org.kde.plasma.worldmap
-%{_datadir}/knsrcfiles/marble.knsrc
 %dir %{_docdir}/HTML/{ca,de,en,es,et,fr,gl,it,lt,nl,pt,pt_BR,ru,sv,uk}/marble
 %{_docdir}/HTML/*/marble/index.cache.bz2
 %{_docdir}/HTML/*/marble/index.docbook
