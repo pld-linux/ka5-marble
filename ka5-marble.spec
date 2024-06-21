@@ -1,6 +1,7 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
+
 %define		kdeappsver	23.08.5
 %define		kframever	5.94.0
 %define		qtver		5.15.2
@@ -42,6 +43,7 @@ BuildRequires:	kf5-kwallet-devel >= %{kframever}
 BuildRequires:	kf5-plasma-framework-devel >= %{kframever}
 BuildRequires:	ninja
 BuildRequires:	qt5-build >= %{qtver}
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	shapelib-devel
 BuildRequires:	shared-mime-info
@@ -92,7 +94,6 @@ Header files for %{kaname} development.
 %description devel -l pl.UTF-8
 Pliki nagłówkowe dla programistów używających %{kaname}.
 
-
 %prep
 %setup -q -n %{kaname}-%{version}
 
@@ -104,15 +105,16 @@ Pliki nagłówkowe dla programistów używających %{kaname}.
 	-DHTML_INSTALL_DIR=%{_kdedocdir} \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	-DMARBLE_PRI_INSTALL_USE_QT_SYS_PATHS=ON
+
 %ninja_build -C build
 
 %if %{with tests}
 ctest --test-dir build
 %endif
 
-
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %ninja_install -C build
 
 rm -rf $RPM_BUILD_ROOT%{_kdedocdir}/lt
@@ -124,28 +126,27 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/marble
 %attr(755,root,root) %{_bindir}/marble-qt
-%{_libdir}/libastro.so.*.*.*
+%attr(755,root,root) %{_libdir}/libastro.so.*.*.*
 %ghost %{_libdir}/libastro.so.1
-%{_libdir}/libmarbledeclarative.so
+%attr(755,root,root) %{_libdir}/libmarbledeclarative.so
+%attr(755,root,root) %{_libdir}/libmarblewidget-qt5.so.*.*.*
 %ghost %{_libdir}/libmarblewidget-qt5.so.28
-%{_libdir}/libmarblewidget-qt5.so.*.*.*
 %{_libdir}/marble
 
 %dir %{_libdir}/plugins
 %dir %{_libdir}/plugins/designer
-
-%{_libdir}/qt5/plugins/libmarble_part.so
-%{_libdir}/qt5/qml/org/kde/marble
 %attr(755,root,root) %{_libdir}/plugins/designer/LatLonEditPlugin.so
 %attr(755,root,root) %{_libdir}/plugins/designer/MarbleNavigatorPlugin.so
 %attr(755,root,root) %{_libdir}/plugins/designer/MarbleWidgetPlugin.so
+
+%attr(755,root,root) %{_libdir}/qt5/plugins/libmarble_part.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/marblethumbnail.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/kf5/krunner/plasma_runner_marble.so
+%{_libdir}/qt5/qml/org/kde/marble
 
 %files data -f %{kaname}.lang
 %defattr(644,root,root,755)
@@ -172,6 +173,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kservices5/marble_thumbnail_kmz.desktop
 %{_datadir}/kservices5/marble_thumbnail_osm.desktop
 %{_datadir}/kservices5/marble_thumbnail_shp.desktop
+%{_datadir}/kservices5/plasma-applet-org.kde.plasma.worldclock.desktop
+%{_datadir}/kservices5/plasma-wallpaper-org.kde.plasma.worldmap.desktop
 %{_datadir}/kxmlgui5/marble
 %{_datadir}/marble
 %{_datadir}/metainfo/org.kde.marble.appdata.xml
@@ -184,15 +187,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/HTML/*/marble/index.cache.bz2
 %{_docdir}/HTML/*/marble/index.docbook
 %{_docdir}/HTML/*/marble/*.png
-%{_datadir}/kservices5/plasma-applet-org.kde.plasma.worldclock.desktop
-%{_datadir}/kservices5/plasma-wallpaper-org.kde.plasma.worldmap.desktop
 
 %files devel
 %defattr(644,root,root,755)
+%{_libdir}/libastro.so
+%{_libdir}/libmarblewidget-qt5.so
 %{_includedir}/astro
 %{_includedir}/marble
 %{_libdir}/cmake/Astro
 %{_libdir}/cmake/Marble
-%{_libdir}/libastro.so
-%{_libdir}/libmarblewidget-qt5.so
 %{_libdir}/qt5/mkspecs/modules/qt_Marble.pri
