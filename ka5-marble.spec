@@ -1,4 +1,3 @@
-# TODO: libwlocate
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
@@ -55,6 +54,7 @@ BuildRequires:	kf5-kparts-devel >= %{kframever}
 BuildRequires:	kf5-krunner-devel >= %{kframever}
 BuildRequires:	kf5-kwallet-devel >= %{kframever}
 BuildRequires:	kf5-plasma-framework-devel >= %{kframever}
+BuildRequires:	libwlocate-devel
 BuildRequires:	ninja
 BuildRequires:	perl-base
 BuildRequires:	phonon-qt5-devel
