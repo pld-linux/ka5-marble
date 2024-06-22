@@ -6,7 +6,8 @@
 %define		kframever	5.94.0
 %define		qtver		5.15.2
 %define		kaname		marble
-Summary:	marble
+Summary:	Marble - virtual globe and world atlas
+Summary(pl.UTF-8):	Marble - wirtualny globus i atlas świata
 Name:		ka5-%{kaname}
 Version:	23.08.5
 Release:	1
@@ -56,43 +57,62 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Marble is a Virtual Globe and World Atlas that you can use to learn
 more about the Earth.
 
-Features
+Features:
+- You can pan and zoom around and you can look up places and roads
+- A mouse click on a place label will provide the respective Wikipedia
+  article
+- You can measure distances between locations
+- It offers different thematic maps: a classroom-style topographic
+  map, a satellite view, street map, Earth at night and temperature
+  and precipitation maps. All maps include a custom map key, so it can
+  also be used as an educational tool for use in classrooms
+- For educational purposes you can also change date and time and watch
+  how the starry sky and the twilight zone on the map change
+- Supports multiple projections: choose between a Flat Map ("Plate
+  carré"), Mercator or the Globe
+- Promotes the usage of free maps
 
-• You can pan and zoom around and you can look up places and roads • A
-mouse click on a place label will provide the respective Wikipedia
-article • You can measure distances between locations • It offers
-different thematic maps: a classroom-style topographic map, a
-satellite view, street map, Earth at night and temperature and
-precipitation maps. All maps include a custom map key, so it can also
-be used as an educational tool for use in classrooms • For educational
-purposes you can also change date and time and watch how the starry
-sky and the twilight zone on the map change • Supports multiple
-projections: choose between a Flat Map ("Plate carré"), Mercator or
-the Globe • Promotes the usage of free maps
+%description -l pl.UTF-8
+Marble to wirtualny globus i atlas świata, pozwalający uczyć się
+więcej o Ziemi.
+
+Cechy:
+- można przesuwać i powiększać, szukać miejsc i dróg
+- kliknięcie na etykiecie miejsca daje odpowiedni artykuł z Wikipedii
+- można mierzyć odległości między położeniami
+- różne mapy tematyczne: mapa topograficzna w stylu szkolnym, widok
+  satelitarny, mapa ulic, Ziemia nocą, mapy temperatur i opadów;
+  wszystkie mapy zawierają własny klucz, więc mogą służyć jako
+  narzędzie edukacyjne
+- w celach edukacyjnych można zmieniać datę oraz czas i obserwować,
+  jak zmienia się gwieździste niebo i strefa zmierzchu
+- obsługa wielu rzutów: wybór między płaską mapą, odwzorowaniem
+  Mercatora i globusem
+- promowanie używania map wolnodostępnych
 
 %package data
-Summary:	Data files for %{kaname}
-Summary(pl.UTF-8):	Dane dla %{kaname}
+Summary:	Data files for Marble
+Summary(pl.UTF-8):	Dane dla Marble
 Group:		X11/Applications
 BuildArch:	noarch
 
 %description data
-Data files for %{kaname}.
+Data files for Marble.
 
 %description data -l pl.UTF-8
-Dane dla %{kaname}.
+Dane dla Marble.
 
 %package devel
-Summary:	Header files for %{kaname} development
-Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kaname}
+Summary:	Header files for Marble development
+Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających Marble
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
-Header files for %{kaname} development.
+Header files for Marble development.
 
 %description devel -l pl.UTF-8
-Pliki nagłówkowe dla programistów używających %{kaname}.
+Pliki nagłówkowe dla programistów używających Marble.
 
 %prep
 %setup -q -n %{kaname}-%{version}
