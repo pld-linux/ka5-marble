@@ -166,7 +166,7 @@ Pliki nagłówkowe dla programistów używających Marble.
 	-G Ninja \
 	%{!?with_tests:-DBUILD_MARBLE_TESTS=OFF} \
 	%{!?with_tests:-DBUILD_TESTING=OFF} \
-	-DHTML_INSTALL_DIR=%{_kdedocdir} \
+	-DKDE_INSTALL_DOCBUNDLEDIR=%{_kdedocdir} \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	-DMARBLE_PRI_INSTALL_USE_QT_SYS_PATHS=ON
 
@@ -181,7 +181,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %ninja_install -C build
 
-rm -rf $RPM_BUILD_ROOT%{_kdedocdir}/lt
 %find_lang %{kaname} --all-name --with-kde --with-qm
 
 %clean
@@ -247,10 +246,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mime/packages/geo.xml
 %{_datadir}/plasma/plasmoids/org.kde.plasma.worldclock
 %{_datadir}/plasma/wallpapers/org.kde.plasma.worldmap
-%dir %{_docdir}/HTML/{ca,de,en,es,et,fr,gl,it,lt,nl,pt,pt_BR,ru,sv,uk}/marble
-%{_docdir}/HTML/*/marble/index.cache.bz2
-%{_docdir}/HTML/*/marble/index.docbook
-%{_docdir}/HTML/*/marble/*.png
 
 %files devel
 %defattr(644,root,root,755)
