@@ -4,7 +4,7 @@
 %bcond_without	qtwebengine	# Qt WebEngine widgets
 
 %ifarch x32
-%undefine	with_qt5webengine
+%undefine	with_qtwebengine
 %endif
 %define		kdeappsver	23.08.5
 %define		kframever	5.94.0
@@ -14,7 +14,7 @@ Summary:	Marble - virtual globe and world atlas
 Summary(pl.UTF-8):	Marble - wirtualny globus i atlas świata
 Name:		ka5-%{kaname}
 Version:	23.08.5
-Release:	2
+Release:	3
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Applications
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
