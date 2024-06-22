@@ -1,7 +1,12 @@
+# TODO: libwlocate
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
+%bcond_without	qtwebengine	# Qt WebEngine widgets
 
+%ifarch x32
+%undefine	with_qt5webengine
+%endif
 %define		kdeappsver	23.08.5
 %define		kframever	5.94.0
 %define		qtver		5.15.2
@@ -16,21 +21,29 @@ Group:		X11/Applications
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
 # Source0-md5:	61d6f7fe2631a7a2081044ee33059011
 URL:		https://kde.org/
-BuildRequires:	Qt5Concurrent-devel
+BuildRequires:	Qt5Concurrent-devel >= %{qtver}
 BuildRequires:	Qt5Core-devel >= %{qtver}
-BuildRequires:	Qt5Gui-devel >= 5.11.1
-BuildRequires:	Qt5Network-devel
-BuildRequires:	Qt5PrintSupport-devel
-BuildRequires:	Qt5Qml-devel >= 5.11.1
-BuildRequires:	Qt5Quick-devel
-BuildRequires:	Qt5SerialPort-devel
-BuildRequires:	Qt5Sql-devel
-BuildRequires:	Qt5Svg-devel
-BuildRequires:	Qt5Test-devel
-BuildRequires:	Qt5Widgets-devel
-BuildRequires:	Qt5Xml-devel
+BuildRequires:	Qt5DBus-devel >= %{qtver}
+BuildRequires:	Qt5Gui-devel >= %{qtver}
+BuildRequires:	Qt5Network-devel >= %{qtver}
+BuildRequires:	Qt5Positioning-devel >= %{qtver}
+BuildRequires:	Qt5PrintSupport-devel >= %{qtver}
+BuildRequires:	Qt5Qml-devel >= %{qtver}
+BuildRequires:	Qt5Quick-devel >= %{qtver}
+BuildRequires:	Qt5SerialPort-devel >= %{qtver}
+BuildRequires:	Qt5Sql-devel >= %{qtver}
+BuildRequires:	Qt5Svg-devel >= %{qtver}
+BuildRequires:	Qt5Test-devel >= %{qtver}
+BuildRequires:	Qt5UiTools-devel >= %{qtver}
+BuildRequires:	Qt5WebChannel-devel >= %{qtver}
+%{?with_qtwebengine:BuildRequires:	Qt5WebEngine-devel >= %{qtver}}
+BuildRequires:	Qt5Widgets-devel >= %{qtver}
+BuildRequires:	Qt5Xml-devel >= %{qtver}
 BuildRequires:	cmake >= 3.20
-BuildRequires:	gettext-devel
+BuildRequires:	fontconfig-devel
+BuildRequires:	freetype-devel >= 2
+BuildRequires:	gettext-tools
+BuildRequires:	gpsd-devel
 BuildRequires:	kf5-extra-cmake-modules >= %{kframever}
 BuildRequires:	kf5-kcoreaddons-devel >= %{kframever}
 BuildRequires:	kf5-kcrash-devel >= %{kframever}
@@ -43,6 +56,10 @@ BuildRequires:	kf5-krunner-devel >= %{kframever}
 BuildRequires:	kf5-kwallet-devel >= %{kframever}
 BuildRequires:	kf5-plasma-framework-devel >= %{kframever}
 BuildRequires:	ninja
+BuildRequires:	perl-base
+BuildRequires:	phonon-qt5-devel
+BuildRequires:	pkgconfig
+BuildRequires:	protobuf-devel
 BuildRequires:	qt5-build >= %{qtver}
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.164
@@ -50,7 +67,30 @@ BuildRequires:	shapelib-devel
 BuildRequires:	shared-mime-info
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
+BuildRequires:	zlib-devel
+%{!?with_qtwebengine:BuildConflicts:	Qt5WebEngine-devel}
 Requires:	%{name}-data = %{version}-%{release}
+Requires:	Qt5Core >= %{qtver}
+Requires:	Qt5DBus >= %{qtver}
+Requires:	Qt5Gui >= %{qtver}
+Requires:	Qt5Network >= %{qtver}
+Requires:	Qt5Positioning >= %{qtver}
+Requires:	Qt5PrintSupport >= %{qtver}
+Requires:	Qt5Qml >= %{qtver}
+Requires:	Qt5Quick >= %{qtver}
+Requires:	Qt5SerialPort >= %{qtver}
+Requires:	Qt5Sql >= %{qtver}
+Requires:	Qt5Svg >= %{qtver}
+Requires:	Qt5WebChannel >= %{qtver}
+%{?with_qtwebengine:Requires:	Qt5WebEngine >= %{qtver}}
+Requires:	Qt5Widgets >= %{qtver}
+Requires:	Qt5Xml >= %{qtver}
+Requires:	kf5-kcoreaddons >= %{kframever}
+Requires:	kf5-kcrash >= %{kframever}
+Requires:	kf5-ki18n >= %{kframever}
+Requires:	kf5-kio >= %{kframever}
+Requires:	kf5-kparts >= %{kframever}
+Requires:	kf5-krunner >= %{kframever}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -107,6 +147,9 @@ Summary:	Header files for Marble development
 Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających Marble
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+%{?with_qtwebengine:Requires:	Qt5WebEngine-devel >= %{qtver}}
+Requires:	Qt5Widgets-devel >= %{qtver}
+Requires:	Qt5Xml-devel >= %{qtver}
 
 %description devel
 Header files for Marble development.
@@ -121,6 +164,7 @@ Pliki nagłówkowe dla programistów używających Marble.
 %cmake \
 	-B build \
 	-G Ninja \
+	%{!?with_tests:-DBUILD_MARBLE_TESTS=OFF} \
 	%{!?with_tests:-DBUILD_TESTING=OFF} \
 	-DHTML_INSTALL_DIR=%{_kdedocdir} \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
